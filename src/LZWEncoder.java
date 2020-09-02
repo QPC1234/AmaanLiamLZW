@@ -1,3 +1,5 @@
+import java.io.FileReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class LZWEncoder {
@@ -11,6 +13,6 @@ public class LZWEncoder {
 	
 	//main method that does the encoding from an input file to an output file
 	public void encode(String inputFile, String outputFile) {
-		
+		PrintWriter pWriter = new PrintWriter(new FileReader (outputFile));
 	}
 }
