@@ -9,6 +9,9 @@ public class LZWEncoder {
 	public LZWEncoder(){
 		key = new ArrayList<String>();
 		//add all the Ascii characters to the key to start with
+		for (int i = 0; i < 256; i++) {
+			key.add(((char) i);
+		}
 	}
 	
 	//main method that does the encoding from an input file to an output file
