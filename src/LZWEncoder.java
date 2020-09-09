@@ -39,6 +39,8 @@ public class LZWEncoder {
 			
 			tempKeyLast = "" + (char)(bReader.read()); //adds to the string we are reading in
 		}
+		pWriter.println (key.indexOf(tempKeyStart));
+		pWriter.println (key.indexOf(tempKeyLast));
 		bReader.close();
 		pWriter.close();
 	}
