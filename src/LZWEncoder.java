@@ -36,7 +36,7 @@ public class LZWEncoder {
 					num = "0" + num;
 				}
 				str.append(num);
-				if(str.length() >= 8) {
+				while(str.length() > 8) {
 					pWriter.print((char)Integer.parseInt(str.substring(0,8), 2));
 					str.delete(0, 8);
 				}
