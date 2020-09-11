@@ -52,6 +52,7 @@ public class LZWEncoder {
 			
 			tempKeyLast = "" + (char)(bReader.read()); //adds to the string we are reading in
 		}
+		
 		String num2 = Integer.toBinaryString(key.indexOf(tempKeyStart));
 		String num3 = Integer.toBinaryString(key.indexOf(tempKeyLast));
 		while(num2.length() < 8) {
@@ -78,6 +79,7 @@ public class LZWEncoder {
 			pWriter.print((char)Integer.parseInt(str.substring(i,i+8), 2));
 		}
 		pWriter.print((char)left); // add character for number of extra zeroes
+		
 		bReader.close();
 		pWriter.close();
 	}
