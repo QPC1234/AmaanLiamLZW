@@ -10,6 +10,7 @@ import java.util.*;
 public class LZWEncoder {
 	private ArrayList<String> key; //index of a string is the code associated with it, ex: A is the 0th element, B is the 1st element, ...
 	
+	int maxSize = 4096;
 	//constructor
 	public LZWEncoder(){
 		key = new ArrayList<String>();
@@ -30,7 +31,9 @@ public class LZWEncoder {
 		while(bReader.ready()) { //loops through the inputFile
 			if(!key.contains(tempKeyStart + tempKeyLast)) { //checks if the read in string is already in the key
 				pWriter.println(key.indexOf(tempKeyStart));
-				key.add(tempKeyStart+tempKeyLast);
+				if(key.size() < maxSize) {
+					key.add(tempKeyStart+tempKeyLast);
+				}
 				tempKeyStart = tempKeyLast; //must do this for the stored string to reset
 			}
 			else {
