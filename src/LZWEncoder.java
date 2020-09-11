@@ -15,7 +15,7 @@ public class LZWEncoder {
 		key = new ArrayList<String>();
 		//add all the Ascii characters to the key to start with
 		for (int i = 0; i < 256; i++) {
-			key.add("" + (char) i);
+			key.add("" + (char) i); // LUKAS WAS HERE
 		}
 	}
 	
