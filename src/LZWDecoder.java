@@ -25,7 +25,22 @@ public class LZWDecoder {
 		
 		StringBuffer str = new StringBuffer();
 		
+		StringBuffer binary = new StringBuffer();
 		while(bReader.ready()) {
+			String add = Integer.toBinaryString(bReader.read());
+			for(int i = 0; i < 8-add.length(); i++) {
+				binary.append("0");
+			}
+			binary.append(add);
+		}
+		bReader.close();
+		
+		int remove = 8 + Integer.parseInt(binary.substring(binary.length()-8), 2);
+		binary.delete(binary.length()-remove, binary.length());
+		
+		
+		for(int i = 0; i < binary.length(); i = i + 12) {
+			int num = Integer.parseInt(binary.substring(i,i+8), 2);
 		}
 	}
 }
