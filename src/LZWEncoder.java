@@ -8,21 +8,21 @@ import java.util.ArrayList;
 import java.util.*;
 
 public class LZWEncoder {
-	private ArrayList<String> key; //index of a string is the code associated with it, ex: A is the 0th element, B is the 1st element, ...
+	private HashMap<String, Integer> key; //index of a string is the code associated with it, ex: A is the 0th element, B is the 1st element, ...
 	
 	int maxSize = 4096;
 	//constructor
 	public LZWEncoder(){
-		key = new ArrayList<String>();
+		key = new HashMap<String, Integer>();
 		//add all the Ascii characters to the key to start with
 		for (int i = 0; i < 256; i++) {
-			key.add("" + (char) i); // LUKAS WAS HERE
+			key.put("" + (char) i, i); // LUKAS WAS HERE
 		}
 	}
 	
 	//main method that does the encoding from an input file to an output file
 	public void encode(String inputFile, String outputFile) throws IOException {
-		PrintWriter pWriter = new PrintWriter(new File(outputFile));
+		PrintWriter pWriter = new PrintWriter(outputFile);
 		BufferedReader bReader = new BufferedReader(new FileReader(inputFile));
 		
 		String tempKeyStart = "" + (char)(bReader.read()); //this is the piece of the string being read that is already in our key
@@ -30,8 +30,8 @@ public class LZWEncoder {
 		StringBuffer str = new StringBuffer();
 		
 		while(bReader.ready()) { //loops through the inputFile
-			if(!key.contains(tempKeyStart + tempKeyLast)) { //checks if the read in string is already in the key
-				String num = Integer.toBinaryString(key.indexOf(tempKeyStart));
+			if(!key.containsKey(tempKeyStart + tempKeyLast)) { //checks if the read in string is already in the key
+				String num = Integer.toBinaryString(key.get(tempKeyStart));
 				while(num.length() < 8) {
 					num = "0" + num;
 				}
@@ -42,7 +42,7 @@ public class LZWEncoder {
 				}
 				
 				if(key.size() < maxSize) {
-					key.add(tempKeyStart+tempKeyLast);
+					key.put(tempKeyStart+tempKeyLast, key.size());
 				}
 				tempKeyStart = tempKeyLast; //must do this for the stored string to reset
 			}
@@ -53,8 +53,8 @@ public class LZWEncoder {
 			tempKeyLast = "" + (char)(bReader.read()); //adds to the string we are reading in
 		}
 		
-		String num2 = Integer.toBinaryString(key.indexOf(tempKeyStart));
-		String num3 = Integer.toBinaryString(key.indexOf(tempKeyLast));
+		String num2 = Integer.toBinaryString(key.get(tempKeyStart));
+		String num3 = Integer.toBinaryString(key.get(tempKeyLast));
 		while(num2.length() < 8) {
 			num2 = "0" + num2;
 		}
