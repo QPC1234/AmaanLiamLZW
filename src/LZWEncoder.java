@@ -32,7 +32,7 @@ public class LZWEncoder {
 		while(bReader.ready()) { //loops through the inputFile
 			if(!key.containsKey(tempKeyStart + tempKeyLast)) { //checks if the read in string is already in the key
 				String num = Integer.toBinaryString(key.get(tempKeyStart));
-				while(num.length() < 8) {
+				while(num.length() < 12) {
 					num = "0" + num;
 				}
 				str.append(num);
@@ -55,11 +55,11 @@ public class LZWEncoder {
 		
 		String num2 = Integer.toBinaryString(key.get(tempKeyStart)); // add the final strings
 		String num3 = Integer.toBinaryString(key.get(tempKeyLast));
-		while(num2.length() < 8) {
+		while(num2.length() < 12) {
 			num2 = "0" + num2;
 		}
 		str.append(num2);
-		while(num3.length() < 8) {
+		while(num3.length() < 12) {
 			num3 = "0" + num3;
 		}
 		str.append(num3);
@@ -69,7 +69,7 @@ public class LZWEncoder {
 			str.delete(0, 8);
 		}
 		
-		int left = 8 - (str.length() % 8); // add extra zeroes for padding
+		int left = (8 - (str.length() % 8)) % 8; // add extra zeroes for padding
 		if(left != 8) {
 			for(int j = 0; j < left; j++) {
 				str.append("0");
