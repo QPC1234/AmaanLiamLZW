@@ -20,9 +20,12 @@ public class LZWDecoder {
 	
 	//main method that does the decoding from an input file to an output file
 	public void decode(String inputFile, String outputFile) throws IOException {
-		//PrintWriter pWriter = new PrintWriter(outputFile);
-		//BufferedReader bReader = new BufferedReader(new FileReader(inputFile));
+		PrintWriter pWriter = new PrintWriter(outputFile);
+		BufferedReader bReader = new BufferedReader(new FileReader(inputFile));
 		
+		StringBuffer str = new StringBuffer();
 		
+		while(bReader.ready()) {
+		}
 	}
 }
