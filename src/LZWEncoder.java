@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.*;
 
 public class LZWEncoder {
-	private HashMap<String, Integer> key; //index of a string is the code associated with it, ex: A is the 0th element, B is the 1st element, ...
+	private HashMap<String, Integer> key; //hashmap where keys are the strings and values are the associated integers
 	
 	int maxSize = 4096;
 	//constructor
@@ -53,7 +53,7 @@ public class LZWEncoder {
 			tempKeyLast = "" + (char)(bReader.read()); //adds to the string we are reading in
 		}
 		
-		String num2 = Integer.toBinaryString(key.get(tempKeyStart));
+		String num2 = Integer.toBinaryString(key.get(tempKeyStart)); // add the final strings
 		String num3 = Integer.toBinaryString(key.get(tempKeyLast));
 		while(num2.length() < 8) {
 			num2 = "0" + num2;
