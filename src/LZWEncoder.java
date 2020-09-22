@@ -4,16 +4,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.*;
 
 public class LZWEncoder {
-	private HashMap<String, Integer> key; //hashmap where keys are the strings and values are the associated integers
+	private HashMap<EncodingWithFrequency, Integer> key; //hashmap where keys are the strings and values are the associated integers
 	
 	int maxSize = 32769;
 	//constructor
 	public LZWEncoder(){
-		key = new HashMap<String, Integer>();
+		key = new HashMap<EncodingWithFrequency, Integer>();
 		//add all the Ascii characters to the key to start with
 		for (int i = 0; i < 256; i++) {
 			key.put("" + (char) i, i); // LUKAS WAS HERE
