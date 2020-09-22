@@ -10,7 +10,7 @@ import java.util.*;
 public class LZWEncoder {
 	private HashMap<String, Integer> key; //hashmap where keys are the strings and values are the associated integers
 	
-	int maxSize = 4096;
+	int maxSize = 32769;
 	//constructor
 	public LZWEncoder(){
 		key = new HashMap<String, Integer>();

@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class LZWDecoder {
 	private HashMap<Integer, String> key;
 	
-	int maxSize = 4096;
+	int maxSize = 32769;
 	
 	public LZWDecoder(){
 		key = new HashMap<Integer, String>();
