@@ -15,7 +15,7 @@ public class LZWEncoder {
 		key = new HashMap<EncodingWithFrequency, Integer>();
 		//add all the Ascii characters to the key to start with
 		for (int i = 0; i < 256; i++) {
-			key.put("" + (char) i, i); // LUKAS WAS HERE
+			key.put(new EncodingWithFrequency("" + (char) i, 0), i); // LUKAS WAS HERE, Quinn and Jake were here
 		}
 	}
 	
@@ -41,7 +41,10 @@ public class LZWEncoder {
 				}
 				
 				if(key.size() < maxSize) {
-					key.put(tempKeyStart+tempKeyLast, key.size());
+					key.put(new EncodingWithFrequency(tempKeyStart+tempKeyLast, 0), key.size());
+				}
+				else {
+					//do the while loop plan to find the smallest, remove the smallest and add in
 				}
 				tempKeyStart = tempKeyLast; //must do this for the stored string to reset
 			}
