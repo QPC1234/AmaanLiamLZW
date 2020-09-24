@@ -6,4 +6,10 @@ public class EncodingWithFrequency {
 		encoding = str;
 		frequency = freq;
 	}
+	
+	private boolean equals(EncodingWithFrequency other) {
+		if (other.frequency == this.frequency)
+			return true;
+		return false;
+	}
 }

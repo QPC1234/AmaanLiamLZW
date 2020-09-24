@@ -23,6 +23,7 @@ public class LZWEncoder {
 	public void encode(String inputFile, String outputFile) throws IOException {
 		PrintWriter pWriter = new PrintWriter(outputFile);
 		BufferedReader bReader = new BufferedReader(new FileReader(inputFile));
+		int smallestFrequency = 0; //Looks for the smallest frequency encoding in the table
 		
 		String tempKeyStart = "" + (char)(bReader.read()); //this is the piece of the string being read that is already in our key
 		String tempKeyLast = "" + (char)(bReader.read()); //this is the last character of the string being read
@@ -44,7 +45,9 @@ public class LZWEncoder {
 					key.put(new EncodingWithFrequency(tempKeyStart+tempKeyLast, 0), key.size());
 				}
 				else {
-					//do the while loop plan to find the smallest, remove the smallest and add in
+					while(!(key.containsKey(smallestFrequency + ""))) {
+						smallestFrequency++;
+					}
 				}
 				tempKeyStart = tempKeyLast; //must do this for the stored string to reset
 			}
