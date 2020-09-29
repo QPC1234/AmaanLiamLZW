@@ -129,10 +129,12 @@ public class LZWEncoder {
 				if(key.size() < maxSize) {
 					EncodingWithFrequency temp = new EncodingWithFrequency(tempKeyStart+tempKeyLast, System.currentTimeMillis());
 					key.put(temp, key.size());
+					pq.remove(temp);
 					pq.add(temp);
 				}
 				else {
-					
+					EncodingWithFrequency temp = pq.poll();
+					key.remove(temp);
 				}
 				tempKeyStart = tempKeyLast; //must do this for the stored string to reset
 			}
