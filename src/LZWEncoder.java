@@ -46,7 +46,7 @@ public class LZWEncoder {
 					EncodingWithFrequency temp = new EncodingWithFrequency(tempKeyStart+tempKeyLast, count);
 					key.put(temp, key.size());
 					pq.add(temp);
-					count+=.00000000000000001;
+					count+=.0000000000000001;
 				}
 				else {
 					
