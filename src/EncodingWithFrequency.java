@@ -1,8 +1,8 @@
 public class EncodingWithFrequency {
 	public String encoding;
-	public double value;
+	public long value;
 	
-	public EncodingWithFrequency(String str, double value) {
+	public EncodingWithFrequency(String str, long value) {
 		encoding = str;
 		this.value = value;
 	}

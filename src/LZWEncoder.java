@@ -24,7 +24,6 @@ public class LZWEncoder {
 		PrintWriter pWriter = new PrintWriter(outputFile);
 		BufferedReader bReader = new BufferedReader(new FileReader(inputFile));
 		PriorityQueue<EncodingWithFrequency> pq = new PriorityQueue<EncodingWithFrequency>(); //Makes a pq to store the least recent encoding
-		double count = 0;
 		
 		String tempKeyStart = "" + (char)(bReader.read()); //this is the piece of the string being read that is already in our key
 		String tempKeyLast = "" + (char)(bReader.read()); //this is the last character of the string being read
@@ -43,10 +42,9 @@ public class LZWEncoder {
 				}
 				
 				if(key.size() < maxSize) {
-					EncodingWithFrequency temp = new EncodingWithFrequency(tempKeyStart+tempKeyLast, count);
+					EncodingWithFrequency temp = new EncodingWithFrequency(tempKeyStart+tempKeyLast, System.currentTimeMillis());
 					key.put(temp, key.size());
 					pq.add(temp);
-					count+=.00000000000000001;
 				}
 				else {
 					
