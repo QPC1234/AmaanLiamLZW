@@ -1,14 +1,14 @@
 public class EncodingWithFrequency {
 	public String encoding;
-	public int frequency;
+	public double value;
 	
-	public EncodingWithFrequency(String str, int freq) {
+	public EncodingWithFrequency(String str, double value) {
 		encoding = str;
-		frequency = freq;
+		this.value = value;
 	}
 	
 	private boolean equals(EncodingWithFrequency other) {
-		if (other.frequency == this.frequency)
+		if (other.value == this.value)
 			return true;
 		return false;
 	}
