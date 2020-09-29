@@ -8,7 +8,7 @@ public class EncodingWithFrequency {
 	}
 	
 	private boolean equals(EncodingWithFrequency other) {
-		if (other.value == this.value)
+		if (other.encoding.equals(this.encoding))
 			return true;
 		return false;
 	}
