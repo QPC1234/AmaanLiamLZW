@@ -57,8 +57,8 @@ public class LZWEncoder
 				{
 					// encode previous
 					//prints to output file instead of appending
-					
 					pw.print(table.get(prev));
+					
 					pq.remove(table.get(prev));
 					pq.add(table.get(prev));
 					
