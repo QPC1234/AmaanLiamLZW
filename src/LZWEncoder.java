@@ -59,6 +59,7 @@ public class LZWEncoder
 					//prints to output file instead of appending
 					pw.print(table.get(prev));
 					
+					//Checks to see if the encoding is already in the pq, if so, remove, add to back either way
 					pq.remove(table.get(prev));
 					pq.add(table.get(prev));
 					
@@ -69,7 +70,7 @@ public class LZWEncoder
 						table.put(temp, (char)num);
 					}
 					else {
-						table.remove(pq.poll());
+						table.remove(pq.poll()); //remove least recent and add new encoding to table
 						table.put(temp, (char)num);
 					}
 

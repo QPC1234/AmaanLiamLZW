@@ -11,6 +11,7 @@ public class LZWDecoder {
 		BufferedReader br = new BufferedReader (new FileReader(inputFileName));
 		encodingTable = new HashMap<Integer, String>();
 		PrintWriter pw = new PrintWriter(new File(outputFileName));
+		PriorityQueue<String> pq = new PriorityQueue<String>(); //Makes a pq to store the least recent encoding
 		//Fills table with the initial characters
 		for(int a = 0; a < INITIAL_TABLE_SIZE; a++) {
 			encodingTable.put(a, new String((char)a + ""));
@@ -28,6 +29,7 @@ public class LZWDecoder {
 		currentStr += (char) currentCode +"";
 		encodingTable.put(nextValue, currentStr);
 		pw.print(currentStr);
+		pq.add(currentStr);
 		
 		//Resets strings to accept the next encoding
 		previousStr = currentStr.substring(1);
@@ -45,6 +47,10 @@ public class LZWDecoder {
 				encodingTable.put(nextValue, currentStr);
 			}
 			pw.print(currentStr);//print the current string
+			
+			//Checks to see if the encoding is already in the pq, if so, remove, add to back either way
+			pq.remove(currentStr);
+			pq.add(currentStr);
 			
 			//Resets strings to accept the next encoding
 			previousStr = encodingTable.get(currentCode);
