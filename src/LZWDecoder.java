@@ -16,6 +16,7 @@ public class LZWDecoder {
 		//Fills table with the initial characters
 		for(int a = 0; a < INITIAL_TABLE_SIZE; a++) {
 			encodingTable.put(a, new String((char)a + ""));
+			pq.add(new String((char)a + ""));
 		}
 		
 		//First iteration, priming variables to loop

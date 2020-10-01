@@ -30,6 +30,11 @@ public class LZWEncoder
 		{
 			BufferedReader br = new BufferedReader(new FileReader(input));
 			PriorityQueue<Character> pq = new PriorityQueue<Character>(); //Makes a pq to store the least recent encoding
+			for(int a = 0; a < INITIAL_TABLE_SIZE; a++)
+			{
+				char current = (char)(a);
+				pq.add(current);
+			}
 			
 			//prints directly to the outputFile instead of using a stringbuilder so it runs faster
 			File file = new File(outputFileName);
