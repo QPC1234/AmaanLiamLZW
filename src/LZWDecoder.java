@@ -4,6 +4,7 @@ import java.util.*;
 public class LZWDecoder {
 	private HashMap<Integer, String> encodingTable;
 	final static int INITIAL_TABLE_SIZE = 128;
+	final static int MAX_TABLE_SIZE = 32769;
 	
 	public LZWDecoder() {}
 	
