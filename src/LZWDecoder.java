@@ -11,7 +11,13 @@ public class LZWDecoder {
 	public void decode(String inputFileName, String outputFileName) throws IOException {
 		BufferedReader br = new BufferedReader (new FileReader(inputFileName));
 		encodingTable = new HashMap<Integer, String>();
+		
+		File file = new File(outputFileName);
+		if (!file.exists()) {
+			file.createNewFile();
+		}
 		PrintWriter pw = new PrintWriter(new File(outputFileName));
+		
 		PriorityQueue<String> pq = new PriorityQueue<String>(); //Makes a pq to store the least recent encoding
 		//Fills table with the initial characters
 		for(int a = 0; a < INITIAL_TABLE_SIZE; a++) {
