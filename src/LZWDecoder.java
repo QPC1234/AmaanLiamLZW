@@ -42,8 +42,9 @@ public class LZWDecoder {
 			currentCode = br.read();
 			if (encodingTable.containsKey(currentCode)) { //if current code is already in the hashmap, add previous characters + 1st letter of current to hashmap
 				currentStr = encodingTable.get(currentCode);
-				if (encodingTable.size() < MAX_TABLE_SIZE)
+				if (encodingTable.size() < MAX_TABLE_SIZE) {
 					encodingTable.put(nextValue, previousStr + currentStr.substring(0,1));
+				}
 				else {
 					encodingTable.remove(pq.poll());
 					encodingTable.put(nextValue, previousStr + currentStr.substring(0,1));
@@ -51,8 +52,9 @@ public class LZWDecoder {
 			} 
 			else { //otherwise, add the previous string + its first letter
 				currentStr = previousStr + previousStr.substring(0,1);
-				if (encodingTable.size() < MAX_TABLE_SIZE)
+				if (encodingTable.size() < MAX_TABLE_SIZE) {
 					encodingTable.put(nextValue, currentStr);
+				}
 				else {
 					encodingTable.remove(pq.poll());
 					encodingTable.put(nextValue, currentStr);
