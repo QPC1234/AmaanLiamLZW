@@ -1,6 +1,8 @@
 import java.util.*;
 import java.io.*;
 
+// Note: used our old code with approval from Mr. Stout because Ryan and Lukas' code was all done in binary (for some reason) (and they overrode Amaan and Liam's original code anyway)
+
 public class LZWEncoder
 {
 	final static int INITIAL_TABLE_SIZE = 128;//creates a final variable because 128 is a "magic number" that appears multiple times
