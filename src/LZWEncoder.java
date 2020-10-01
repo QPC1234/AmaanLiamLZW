@@ -27,6 +27,7 @@ public class LZWEncoder
 		try
 		{
 			BufferedReader br = new BufferedReader(new FileReader(input));
+			PriorityQueue<String> pq = new PriorityQueue<String>(); //Makes a pq to store the least recent encoding
 			
 			//prints directly to the outputFile instead of using a stringbuilder so it runs faster
 			File file = new File(outputFileName);
@@ -54,13 +55,21 @@ public class LZWEncoder
 				{
 					// encode previous
 					//prints to output file instead of appending
+					
 					pw.print(table.get(prev));
+					pq.remove(table.get(prev));
+					pq.add(table.get(prev));
 					
 					// max 256 bc the extended ascii table ends at 255, so we can't represent anything past 255
 					//the larger the table the more it compresses, so we increased the max table size to a max of 2^15 (32768) (2^16 created some unreadable chars)
 					// add to the table
-					if(num < 32769)
+					if(num < 32769) {
 						table.put(temp, (char)num);
+					}
+					else {
+						table.remove(pq.poll());
+						table.put(temp, (char)num);
+					}
 
 					// increase the next available ascii/table slot
 					num++;
