@@ -18,11 +18,11 @@ public class LZWDecoder {
 		}
 		PrintWriter pw = new PrintWriter(new File(outputFileName));
 		
-		PriorityQueue<String> pq = new PriorityQueue<String>(); //Makes a pq to store the least recent encoding
+		PriorityQueue<Encoding> pq = new PriorityQueue<Encoding>(); //Makes a pq to store the least recent encoding
 		//Fills table with the initial characters
 		for(int a = 0; a < INITIAL_TABLE_SIZE; a++) {
 			encodingTable.put(a, new String((char)a + ""));
-			pq.add(new String((char)a + ""));
+			pq.add(new Encoding(new String((char)a + "")));
 		}
 		
 		//First iteration, priming variables to loop
@@ -37,7 +37,7 @@ public class LZWDecoder {
 		currentStr += (char) currentCode +"";
 		encodingTable.put(nextValue, currentStr);
 		pw.print(currentStr);
-		pq.add(currentStr);
+		pq.add(new Encoding(currentStr));
 		
 		//Resets strings to accept the next encoding
 		previousStr = currentStr.substring(1);
@@ -69,8 +69,8 @@ public class LZWDecoder {
 			pw.print(currentStr);//print the current string
 			
 			//Checks to see if the encoding is already in the pq, if so, remove, add to back either way
-			pq.remove(currentStr);
-			pq.add(currentStr);
+			while (pq.remove(new Encoding(currentStr)))
+			pq.add(new Encoding(currentStr));
 			
 			//Resets strings to accept the next encoding
 			previousStr = encodingTable.get(currentCode);

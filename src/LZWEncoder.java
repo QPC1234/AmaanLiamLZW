@@ -29,11 +29,11 @@ public class LZWEncoder
 		try
 		{
 			BufferedReader br = new BufferedReader(new FileReader(input));
-			PriorityQueue<Character> pq = new PriorityQueue<Character>(); //Makes a pq to store the least recent encoding
+			PriorityQueue<Encoding> pq = new PriorityQueue<Encoding>(); //Makes a pq to store the least recent encoding
 			for(int a = 0; a < INITIAL_TABLE_SIZE; a++)
 			{
 				char current = (char)(a);
-				pq.add(current);
+				pq.add(new Encoding(current + ""));
 			}
 			
 			//prints directly to the outputFile instead of using a stringbuilder so it runs faster
@@ -65,8 +65,8 @@ public class LZWEncoder
 					pw.print(table.get(prev));
 					
 					//Checks to see if the encoding is already in the pq, if so, remove, add to back either way
-					pq.remove(table.get(prev));
-					pq.add(table.get(prev));
+					while (pq.remove(new Encoding(table.get(prev) + "")))
+					pq.add(new Encoding(table.get(prev) + ""));
 					
 					// max 256 bc the extended ascii table ends at 255, so we can't represent anything past 255
 					//the larger the table the more it compresses, so we increased the max table size to a max of 2^15 (32768) (2^16 created some unreadable chars)
